@@ -5,13 +5,15 @@ import {
   Button,
   TouchableOpacity,
   Alert,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { COLORS } from "../../constants";
-import { AuthContext } from "../../components/context";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import { useNavigation } from "@react-navigation/native";
-import client from "../../api/client";
+} from 'react-native';
+import Toast from 'react-native-toast-message';
+import React, { useEffect, useState } from 'react';
+import { COLORS } from '../../constants';
+import { AuthContext } from '../../components/context';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useNavigation } from '@react-navigation/native';
+import client from '../../api/client';
+import axiosInstance from '../../api/axiosInstance';
 
 const ScanQr = () => {
   const { user } = React.useContext(AuthContext);
@@ -27,7 +29,7 @@ const ScanQr = () => {
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setPermission(status === "granted");
+      setPermission(status === 'granted');
     })();
   }, []);
   // if (permission === null) {
@@ -49,30 +51,32 @@ const ScanQr = () => {
   //   );
   // }
 
-  const handleQrCodeScanned = async ({  data }) => {
+  const handleQrCodeScanned = async ({ data }) => {
     setScanQr(true);
     const qrCodeData = data;
 
     const { classId, teacherId, timestamp } = JSON.parse(qrCodeData);
     setClassId(classId);
     setstudentId(user._id);
-console.log(classId,user._id)
+    console.log(classId, user._id);
     // console.log(classId);
     // console.log(user._id);
     // You can add additional validation here if needed
-    const res = await client.get(
-      `/api/class/teacher/attendance/takeAttendence/${classId}/students/${user._id}/attendance`
-    );
-    console.log(res.data);
-    console.log("hiiii attendance");
-    if (res.data.success === true) {
-      Alert.alert(res.data.message);
-      return;
-    }
-    if (res.data.success === false) {
-      Alert.alert(res.data.message);
-      return;
-    }
+    await axiosInstance
+      .get(
+        `/api/class/teacher/attendance/takeAttendence/${classId}/students/${user._id}/attendance`,
+      )
+      .then((res) => {
+        if (res.data.success === true) {
+          Alert.alert(res.data.message);
+          return;
+        }
+        if (res.data.success === false) {
+          Alert.alert(res.data.message);
+          return;
+        }
+      });
+
     // try {
     //   const { classId, teacherId, timestamp } = JSON.parse(qrCodeData);
     //   setClassId(classId);
@@ -116,7 +120,7 @@ console.log(classId,user._id)
             />
             {scanQr && (
               <Button
-                title="tap to scan again"
+                title='tap to scan again'
                 onPress={() => setScanQr(false)}
               />
             )}
@@ -147,22 +151,22 @@ export default ScanQr;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   maintext: {
     fontSize: 16,
     margin: 20,
   },
   barcodebox: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 300,
     width: 300,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: "tomato",
+    backgroundColor: 'tomato',
   },
   button: {
     backgroundColor: COLORS.primary,
@@ -173,8 +177,8 @@ const styles = StyleSheet.create({
     width: 180,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
