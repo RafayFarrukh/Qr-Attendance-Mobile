@@ -1,92 +1,114 @@
-// import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
-import { COLORS } from "../../constants";
-import { View, Text, Switch, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import axiosInstance from '../../api/axiosInstance';
+import { COLORS, ROUTES } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 
-import axios from "axios";
-const Wallet = () => {
-  const navigation = useNavigation();
-
-  const [password, setPassword] = useState("");
-  const [department, setDepartment] = useState("");
+const Wallet = ({ navigation }) => {
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    // Make API call to retrieve user data
-    axios
-      .get("https://example.com/api/user")
-      .then((response) => {
-        const userData = response.data;
-
-        setPassword(userData.password);
-        setDepartment(userData.department);
+    axiosInstance
+      .get('/api/course/teacher/showAllCourses/student')
+      .then((res) => {
+        setCourses(res.data.courseList);
+        console.log(res.data.courseList.map((item)=>item._id))
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-  const [remindersEnabled, setRemindersEnabled] = useState(false);
 
-  const toggleNotifications = () => {
-    setNotificationsEnabled(!notificationsEnabled);
-  };
-
-  const toggleReminders = () => {
-    setRemindersEnabled(!remindersEnabled);
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Wallet</Text>
-
-      <View style={styles.row}>
-        <Text style={styles.rowLabel}>Courses</Text>
-        <Text style={styles.rowValue}>rafay</Text>
-      </View>
+      <Text style={styles.header}>
+        <Ionicons name="ios-school" size={28}  color={COLORS.primary} /> My Courses
+      </Text>
+      {courses.map((course) => (
+        <TouchableOpacity 
+          key={course._id} 
+          style={styles.courseContainer}
+          onPress={() => navigation.navigate('ViewAttendance', { courseId: course._id })}
+        >
+          <Text style={styles.courseName}>{course.Course._id.courseName}</Text>
+          <View style={styles.infoContainer}>
+            <Ionicons name="ios-barcode" size={16} color={COLORS.primary} />
+            <Text style={styles.courseCode}>
+              {course.Course._id.courseCode}
+            </Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Ionicons name="ios-person" size={16} color={COLORS.primary} />
+            <Text style={styles.teacherEmail}>
+              {course.teacher.email}
+            </Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Ionicons name="ios-people" size={16} color={COLORS.primary} />
+            <Text style={styles.studentCount}>
+              {course.students.length} Students
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 };
 
-export default Wallet;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     padding: 20,
+    backgroundColor: '#F5F5F5',
   },
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#292929',
     marginBottom: 20,
   },
-  setting: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  courseContainer: {
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    padding: 20,
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  settingText: {
-    fontSize: 18,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontWeight: "bold",
-    fontSize: 18,
+  courseName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#292929',
     marginBottom: 10,
   },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 5,
   },
-  rowLabel: {
+  courseCode: {
     fontSize: 16,
+    color: '#696969',
+    marginLeft: 5,
   },
-  rowValue: {
+  teacherEmail: {
     fontSize: 16,
-    color: "#555",
+    color: '#696969',
+    marginLeft: 5,
+  },
+  studentCount: {
+    fontSize: 16,
+    color: '#696969',
+    marginLeft: 5,
   },
 });
+
+export default Wallet;

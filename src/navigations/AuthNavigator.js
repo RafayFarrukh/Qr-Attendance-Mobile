@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import Register from "../screens/auth/Register";
-import Login from "../screens/auth/Login";
-import { COLORS, ROUTES } from "../constants";
-import DrawerNavigator from "./DrawerNavigator";
+import React, { useState, useEffect, useContext } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Register from '../screens/auth/Register';
+import Login from '../screens/auth/Login';
+import { COLORS, ROUTES } from '../constants';
+import DrawerNavigator from './DrawerNavigator';
 
-import { NavigationContainer } from "@react-navigation/native";
-import ScanQr from "../screens/home/ScanQr";
-import ChangePassword from "../screens/home/ChangePassword";
+import { NavigationContainer } from '@react-navigation/native';
+import ScanQr from '../screens/home/ScanQr';
+import ViewAttendance from '../screens/home/ViewAttendance';
+import ChangePassword from '../screens/home/ChangePassword';
 // import { IconButton } from "react-native-paper";
-import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Profile } from '../screens';
 const Stack = createStackNavigator();
 
 function AuthNavigator(props) {
@@ -23,9 +25,9 @@ function AuthNavigator(props) {
   React.useEffect(() => {
     console.log(props.token);
     if (props.token == null) {
-      console.log("token is empty");
+      console.log('token is empty');
     } else {
-      console.log("token is not empty");
+      console.log('token is not empty');
     }
   }, []);
 
@@ -43,7 +45,7 @@ function AuthNavigator(props) {
           //   onPress={() => navigation.goBack()}
           // />
           <AntDesign
-            name="arrowleft"
+            name='arrowleft'
             style={{ marginLeft: 12 }}
             size={28}
             color={COLORS.primary}
@@ -75,9 +77,11 @@ function AuthNavigator(props) {
             component={DrawerNavigator}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ScanQr" component={ScanQr} />
+          <Stack.Screen name='ScanQr' component={ScanQr} />
+          <Stack.Screen name='ViewAttendance' component={ViewAttendance} />
+          <Stack.Screen name='Profile' component={Profile} />
           <Stack.Screen
-            name="ChangePassword"
+            name='ChangePassword'
             component={ChangePassword}
             options={{ cardShadowEnabled: true }}
             // options={{ headerShown: false }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -7,21 +7,21 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
-} from "react-native";
-
+} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import {
   DrawerContentScrollView,
   DrawerItemList,
-} from "@react-navigation/drawer";
-import { COLORS, IMGS } from "../constants";
-import { AuthContext } from ".././components/context";
+} from '@react-navigation/drawer';
+import { COLORS, IMGS } from '../constants';
+import { AuthContext } from '.././components/context';
 
-const { width } = Dimensions.get("screen");
-const _email = "FA19-bcs-043@cuilahore.edu.pk";
+const { width } = Dimensions.get('screen');
+const _email = 'FA19-bcs-043@cuilahore.edu.pk';
 const CustomDrawer = (props) => {
   const { signOut, token, user } = React.useContext(AuthContext);
   useEffect(() => {
-    const split = _email.split(".", 2);
+    const split = _email.split('.', 2);
     console.log(user);
     console.log(split[0]);
     console.log(split[1]);
@@ -29,10 +29,10 @@ const CustomDrawer = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfoSection}>
-        <View style={{ flexDirection: "row", marginTop: 70 }}>
+        <View style={{ flexDirection: 'row', marginTop: 70 }}>
           <Image source={IMGS.user} style={styles.avatar} />
 
-          <View style={{ marginLeft: 15, flexDirection: "column" }}>
+          <View style={{ marginLeft: 15, flexDirection: 'column' }}>
             <Text style={styles.name}>{user ? user.fullName : null}</Text>
             <Text style={styles.email}>{user ? user.email : null}</Text>
             <Text style={styles.email}>{user ? user.stdId : null}</Text>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   userInfoSection: {
     paddingLeft: 20,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     paddingTop: 50,
     paddingBottom: 20,
   },
@@ -91,19 +91,19 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     marginTop: 3,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   email: {
     fontSize: 13,
     marginTop: 3,
     flexShrink: 1,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   userImg: {
     width: 110,
     height: 110,
     borderRadius: 110 / 2,
-    position: "absolute",
+    position: 'absolute',
     left: width / 2 - 110,
     bottom: -110 / 2,
     borderWidth: 4,
@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
     paddingVertical: 10,
     borderRadius: 5,
-    marginTop: Platform.OS === "ios" ? 400 : 350,
+    marginTop: Platform.OS === 'ios' ? 400 : 350,
     backgroundColor: COLORS.primary,
   },
   logoutButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
