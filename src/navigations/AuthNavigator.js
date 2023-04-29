@@ -14,6 +14,7 @@ import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Profile } from '../screens';
+import EditProfile from '../screens/home/EditProfile';
 const Stack = createStackNavigator();
 
 function AuthNavigator(props) {
@@ -80,6 +81,7 @@ function AuthNavigator(props) {
           <Stack.Screen name='ScanQr' component={ScanQr} />
           <Stack.Screen name='ViewAttendance' component={ViewAttendance} />
           <Stack.Screen name='Profile' component={Profile} />
+          <Stack.Screen name='EditProfile' component={EditProfile} />
           <Stack.Screen
             name='ChangePassword'
             component={ChangePassword}

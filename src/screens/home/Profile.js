@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AuthContext } from '../../components/context';
 import { COLORS } from '../../constants';
 
-const Profile = () => {
-  const { user } = React.useContext(AuthContext);
+const Profile = ({ navigation }) => {
+  const { user } = useContext(AuthContext);
+
+  const handleEditProfile = () => {
+    navigation.navigate('EditProfile');
+  };
 
   return (
     <View style={styles.container}>
@@ -13,6 +17,14 @@ const Profile = () => {
         <View style={styles.avatarContainer}>
           <Image source={{ uri: user.profilePic }} style={styles.avatar} />
         </View>
+        <TouchableOpacity onPress={handleEditProfile}>
+          <MaterialCommunityIcons
+            name='pencil-outline'
+            size={24}
+            color={COLORS.primary}
+            style={styles.editIcon}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.body}>
         <View style={styles.section}>
@@ -96,6 +108,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 34,
     color: '#555',
+  },
+  editIcon: {
+    marginLeft: 20,
   },
 });
 
