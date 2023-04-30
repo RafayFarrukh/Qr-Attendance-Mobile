@@ -140,19 +140,11 @@ const Login = (props) => {
       <View style={styles.container}>
         <View style={styles.wFull}>
           <View style={styles.row}>
-            {/* <Logo width={55} height={55} style={styles.mr7} /> */}
-            <Text style={styles.brandName}>Qr Code Scanner</Text>
+            <Text style={styles.brandName}>Qr Code Attendance</Text>
           </View>
 
           <Text style={styles.loginContinueTxt}>Login in to continue</Text>
-          <View
-            // style={{
-            //   flexDirection: "row",
-            //   justifyContent: "center",
-            //   marginBottom: 20,
-            // }}
-            style={styles.action}
-          >
+          <View style={styles.action}>
             <FontAwesome name='user-o' size={19} />
 
             <TextInput
@@ -204,12 +196,8 @@ const Login = (props) => {
             <LinearGradient
               colors={[COLORS.gradientForm, COLORS.primary]}
               style={styles.linearGradient}
-              // start={{y: 0.0, x: 0.0}}
-              // end={{y: 1.0, x: 0.0}}
             >
-              {/******************** LOGIN BUTTON *********************/}
               <TouchableOpacity
-                // onPress={() => navigation.navigate(ROUTES.HOME)}
                 onPress={() => {
                   loginHandle(data.username, data.password);
                   setIsLoading(true);
@@ -225,14 +213,8 @@ const Login = (props) => {
               </TouchableOpacity>
             </LinearGradient>
           </View>
-
-          {/***************** FORGOT PASSWORD BUTTON *****************/}
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(ROUTES.FORGOT_PASSWORD, {
-                // userId: "X0001",
-              })
-            }
+            onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD, {})}
             style={styles.forgotPassBtn}
           >
             <Text style={styles.forgotPassText}>Forgot Password?</Text>
@@ -241,7 +223,6 @@ const Login = (props) => {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}> Don't have an account? </Text>
-          {/******************** REGISTER BUTTON *********************/}
           <TouchableOpacity
             onPress={() => navigation.navigate(ROUTES.REGISTER)}
           >
@@ -275,7 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   brandName: {
-    fontSize: 42,
+    fontSize: 36,
     textAlign: 'center',
     fontWeight: 'bold',
     color: COLORS.primary,
@@ -289,19 +270,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
-    // borderWidth: 1,
     borderColor: COLORS.grayLight,
-    // padding: 10,
-    // marginVertical: 10,
     borderRadius: 5,
-    // height: 55,
-    // paddingVertical: 0,
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
     color: '#05375a',
   },
-  // Login Btn Styles
   loginBtnWrapper: {
     height: 55,
     marginTop: 32,
@@ -361,9 +336,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
   },
-  mr7: {
-    marginRight: 7,
-  },
+
   action: {
     flexDirection: 'row',
     marginTop: 30,
