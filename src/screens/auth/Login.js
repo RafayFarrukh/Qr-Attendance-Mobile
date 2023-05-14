@@ -85,51 +85,44 @@ const Login = (props) => {
     }
   };
   const loginHandle = async (userName, password) => {
-    const res = await client
-      .post('/api/auth/student/login', {
+    console.log('login being hit mobile');
+    try {
+      const res = await client.post('/api/auth/student/login', {
         email: data.username,
         password: data.password,
-      })
-      .then(setIsLoading(false));
-    // console.log(res.data);
-    // console.log({
-    //   userName,
-    //   password,
-    // });
-    if (res.data.success == true) {
-      AsyncStorage.setItem('userInfo', JSON.stringify(res.data));
-      AsyncStorage.setItem('userToken', res.data.token);
+      });
 
-      // console.log(res.data.token);
-    }
-    // const foundUser = Users.filter((item) => {
-    //   return userName == item.username && password == item.password;
-    // });
+      if (res?.data?.success == true) {
+        AsyncStorage.setItem('userInfo', JSON.stringify(res?.data));
+        AsyncStorage.setItem('userToken', res?.data.token);
+      }
 
-    if (data.username.length == 0 || data.password.length == 0) {
+      if (data.username.length == 0 || data.password.length == 0) {
+        Alert.alert(
+          'Wrong Input!',
+          'Username or password field cannot be empty.',
+          [{ text: 'Okay' }],
+        );
+        return;
+      }
+
+      if (res?.data?.success == false) {
+        Alert.alert('Invalid Credentials', res?.data?.error, [
+          { text: 'Okay' },
+        ]);
+        return;
+      }
+
+      signIn(res.data);
+      navigation.navigate(ROUTES.HOME);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Error', 'An error occurred. Please try again later.', [
+        { text: 'Okay' },
+      ]);
+    } finally {
       setIsLoading(false);
-
-      Alert.alert(
-        'Wrong Input!',
-        'Username or password field cannot be empty.',
-        [{ text: 'Okay' }],
-      );
-      return;
     }
-    // if (res.data.success == false) {
-    //   console.log(res.data.error);
-    // }
-    if (res.data.success == false) {
-      setIsLoading(false);
-      // console.log(res.data.error);
-      Alert.alert('Invalid Credentials', res.data.error, [{ text: 'Okay' }]);
-      return;
-    }
-
-    signIn(res.data).then;
-    navigation.navigate(ROUTES.HOME);
-    // navigation.navigate(ROUTES.HOME);
-    // .then(data.username == null && data.password == null);
   };
 
   // const {navigation} = props;

@@ -1,3 +1,3 @@
-import axios from "axios";
+import axios from 'axios';
 
-export default axios.create({ baseURL: "http://192.168.18.3:5000" });
+export default axios.create({ baseURL: 'http://192.168.18.131:5000' });
