@@ -62,37 +62,6 @@ const Settings = ({ navigation }) => {
       </View>
 
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Department</Text>
-        <View style={styles.headingContainer}>
-          <AntDesign name='team' size={24} color={COLORS.primary} />
-          <Text style={styles.headingTitle}>Select Department</Text>
-          <AntDesign
-            name='arrowright'
-            style={{
-              marginLeft: 'auto',
-            }}
-            size={24}
-            color={COLORS.primary}
-          />
-        </View>
-      </View>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Courses</Text>
-        <View style={styles.headingContainer}>
-          <AntDesign name='book' size={24} color={COLORS.primary} />
-          <Text style={styles.headingTitle}>View Courses</Text>
-          <AntDesign
-            name='arrowright'
-            style={{
-              marginLeft: 'auto',
-            }}
-            size={24}
-            color={COLORS.primary}
-          />
-        </View>
-      </View>
-
-      <View style={styles.sectionContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Text style={styles.sectionTitle}>Profile</Text>
           <View style={styles.headingContainer}>

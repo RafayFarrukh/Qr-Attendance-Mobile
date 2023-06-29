@@ -1,11 +1,11 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { COLORS, ROUTES } from "../constants";
-import { Wallet, Notifications } from "../screens";
-import BottomTabNavigator from "./BottomTabNavigator";
-import Icon from "react-native-vector-icons/Ionicons";
-import CustomDrawer from "../components/CustomDrawer";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { COLORS, ROUTES } from '../constants';
+import { Wallet, Notifications } from '../screens';
+import BottomTabNavigator from './BottomTabNavigator';
+import Icon from 'react-native-vector-icons/Ionicons';
+import CustomDrawer from '../components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,13 +26,13 @@ function DrawerNavigator() {
         name={ROUTES.HOME}
         component={BottomTabNavigator}
         options={{
-          title: "Home",
+          title: 'Home',
           drawerIcon: ({ focused, color, size }) => (
-            <Icon name="home-sharp" size={18} color={color} />
+            <Icon name='home-sharp' size={18} color={color} />
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name={ROUTES.WALLET_DRAWER}
         component={Wallet}
         options={{
@@ -52,7 +52,7 @@ function DrawerNavigator() {
             <Icon name="notifications" size={18} color={color} />
           ),
         }}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 }

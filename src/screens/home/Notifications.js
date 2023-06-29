@@ -1,20 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Switch } from 'react-native';
 
 const Notifications = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Notifications</Text>
-      </View>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Security</Text>
-      </View>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Department</Text>
-      </View>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Courses</Text>
       </View>
     </View>
   );
@@ -23,7 +14,7 @@ const Notifications = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     paddingHorizontal: 20,
     paddingTop: 50,
   },

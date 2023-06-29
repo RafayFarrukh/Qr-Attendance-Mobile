@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import AuthNavigator from './src/navigations/AuthNavigator';
 import { AuthContext } from './src/components/context';
@@ -83,6 +84,7 @@ export default function App() {
         // value={{ state, dispatch }}
       >
         <AuthNavigator token={token} />
+        <Toast ref={(ref) => Toast.setRef(ref)} />
       </AuthContext.Provider>
     </NavigationContainer>
   );

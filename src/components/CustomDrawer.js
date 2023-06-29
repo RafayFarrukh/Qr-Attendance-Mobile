@@ -29,7 +29,7 @@ const CustomDrawer = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfoSection}>
-        <View style={{ flexDirection: 'row', marginTop: 70 }}>
+        <View style={{ flexDirection: 'column', marginTop: 70 }}>
           <Image source={IMGS.user} style={styles.avatar} />
 
           <View style={{ marginLeft: 15, flexDirection: 'column' }}>

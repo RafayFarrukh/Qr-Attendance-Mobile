@@ -49,7 +49,7 @@ const Login = (props) => {
   };
 
   const handlePasswordChange = (val) => {
-    if (val.trim().length >= 8) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
         password: val,
@@ -117,6 +117,8 @@ const Login = (props) => {
       navigation.navigate(ROUTES.HOME);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+
       Alert.alert('Error', 'An error occurred. Please try again later.', [
         { text: 'Okay' },
       ]);
@@ -180,7 +182,7 @@ const Login = (props) => {
           {data.isValidPassword ? null : (
             <Animatable.View animation='fadeInLeft' duration={500}>
               <Text style={styles.errorMsg}>
-                Password must be 8 characters long.
+                Password must be 4 characters long.
               </Text>
             </Animatable.View>
           )}
@@ -193,7 +195,7 @@ const Login = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   loginHandle(data.username, data.password);
-                  setIsLoading(true);
+                  // setIsLoading(true);
                 }}
                 activeOpacity={0.7}
                 style={styles.loginBtn}
@@ -206,22 +208,22 @@ const Login = (props) => {
               </TouchableOpacity>
             </LinearGradient>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD, {})}
             style={styles.forgotPassBtn}
           >
             <Text style={styles.forgotPassText}>Forgot Password?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <View style={styles.footer}>
+        {/* <View style={styles.footer}>
           <Text style={styles.footerText}> Don't have an account? </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate(ROUTES.REGISTER)}
           >
             <Text style={styles.signupBtn}>Sign Up</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );
